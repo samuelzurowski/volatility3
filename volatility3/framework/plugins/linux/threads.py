@@ -48,9 +48,8 @@ class Threads(interfaces.plugins.PluginInterface):
 
                 thread_offset = thread.thread_group.vol.offset
 
-                yield (0, (format_hints.Hex(task_offset), pid, name, 
-                           thread.pid, thread_name, format_hints.Hex(thread_offset),
-                           uid_cred, gid_cred, euid_cred))
+                yield (0, (format_hints.Hex(task_offset), pid, name, thread.pid, thread_name, 
+                           format_hints.Hex(thread_offset), uid_cred, gid_cred, euid_cred))
 
     def run(self):
         filter_func = pslist.PsList.create_pid_filter(self.config.get('pid', None))
@@ -62,6 +61,7 @@ class Threads(interfaces.plugins.PluginInterface):
                                    ("Thread PID", int), 
                                    ("Thread Name", str), 
                                    ("Thread Offset", format_hints.Hex), 
-                                   ("uid", int), ("gid", int), 
+                                   ("uid", int), 
+                                   ("gid", int), 
                                    ("euid", int)], 
                                   self._generator(tasks))
